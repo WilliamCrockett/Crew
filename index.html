@@ -11,15 +11,169 @@
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
-    <body class="container-fluid">
-      <h1>Example</h1>
+    <body>
+      <!-- Nav bar -->
+      <nav class="navbar navbar-default" id="navbar">
+        <div class="container-fluid">
+          <div class="navbar-header">
+              <h1>Example</h1>
+              <button type="button" class="btn btn-default navbar-btn settings">Settings</button>
+            <a class="navbar-brand" href="#">
+              <img alt="Brand" src="...">
+            </a>
+          </div>
+        </div>
+      </nav>
+      <!-- Main section -->
+      <div class="container main-section" id="mainSection">
+      <!-- control-buttons -->
+      <div class="control-buttons">
+        <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#NewCrewMember" id="add-new-crew-member">
+          New crew member
+        </button>
+        <button class="btn btn-default new-event" type="submit">New event</button>
+      </div>
+      <hr>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
+      <div class="content-table">
+        <table class="table table-striped table-hover">
+          <!-- placeholders -->
+          <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- modal add new crew member -->
+      <div class="modal fade" id="NewCrewMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add new crew member</h4>
+            </div>
+            <div class="modal-body">
+              <!--  Modal form -->
+              <form class="form-horizontal" id="signUp">
+                <div class="form-group">
+
+                  <label for="inputName" class="col-sm-3 control-label">Full Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="person[name]" class="form-control" id="newCrewName" placeholder="Full Name">
+                  </div>
+
+                  <label for="SAS Number" class="col-sm-3 control-label">SAS Number</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="person[sasnumber]" class="form-control" id="newCrewSASNumber" placeholder="SAS Number">
+                  </div>
+
+                  <label for="Emaill Address" class="col-sm-3 control-label">Email Address</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="email" name="person[email]" class="form-control" id="newCrewEmail" placeholder="Email Address">
+                  </div>
+
+                  <label for="Cellphone Number" class="col-sm-3 control-label">Cell Number</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="tel" name="person[tel]" class="form-control" id="newCrewTellNumber" placeholder="083 123 4567">
+                  </div>
+
+                  <label for="NoKName" class="col-sm-3 control-label">Next of Kin Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="person[NOKName]" class="form-control" id="newCrewNOKName" placeholder="Full Name">
+                  </div>
+
+                  <label for="Cellphone Number" class="col-sm-3 control-label">NOK Cell Number</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="tel" name="person[NOKtel]" class="form-control" id="newCrewNOKTellNumber" placeholder="083 123 4567">
+                  </div>
+
+                  <label for="Shirt Size" class="col-sm-3 control-label">Shirt Size</label>
+                  <div class="col-sm-9 pad-5">
+                    <select name="shirt-size">
+                      <option value="Small">Small</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Large">Large</option>
+                      <option value="Extra Large">Extra Large</option>
+                      <option value="XX Large">XX Large</option>
+                      <option value="XXX Large">XXX Large</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-offset-2 col-sm-10 add-crew-btn">
+                    <button type="submit" class="btn btn-default">Add</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <!-- signin -->
+    <form class= "sign-in-form" id="signIn">
+      <div class="col-md-4 sign-in-main">
+        <div class="sign-up">
+          <h2 class="sign-in">Sign In</h2>
+          <label for="Emaill Address" class="col-sm-3 control-label pad-5">Email Address</label>
+          <div class="col-sm-9 pad-5">
+            <input type="email" name="credentials[email]" class="form-control" id="newCrewEmail" placeholder="Email Address">
+          </div>
+
+          <label for="inputPassword3" class="col-sm-3 control-label pad-5">Password</label>
+          <div class="col-sm-9 pad-5">
+            <input type="password" name="credentials[password]" class="form-control" id="changePassword" placeholder="Password">
+          </div>
+          <div class="sign-in pad-5">
+            <button type="submit" class="btn btn-default btn-sign-in pad-5">Sign In</button>
+            <h6>Not a member? <a class="signup-link" id="signUpLink">Sign-up!</a></h6>
+          </div>
+
+        </div>
+      </div>
+    </form>
+
+    <!-- signup -->
+    <form class="sign-up-form" id="signUp">
+      <div class="col-md-4 sign-up-main">
+        <div class="sign-up">
+          <h2 class="sign-up">Sign Up</h2>
+          <label for="Emaill Address" class="col-sm-3 control-label pad-5">Email Address</label>
+          <div class="col-sm-9 pad-5">
+            <input type="email" name="credentials[email]" class="form-control" id="newCrewEmail" placeholder="Email Address">
+          </div>
+
+          <label for="inputPassword3" class="col-sm-3 control-label pad-5">Password</label>
+          <div class="col-sm-9 pad-5">
+            <input type="password" name="credentials[password]" class="form-control" id="signUpPassword" placeholder="Password">
+          </div>
+          <label for="inputPassword3" class="col-sm-3 control-label pad-5">Password</label>
+          <div class="col-sm-9 pad-5">
+            <input type="password" name="credentials[password_confirmation]" class="form-control" id="signUpPasswordConf" placeholder="Confirm password">
+          </div>
+          <div class="sign-up pad-5">
+            <button type="submit" class="btn btn-default btn-sign-up pad-5">Sign up</button>
+            <h6>Back to <a class="signin-link" id="signInLink">Sign-in?</a></h6>
+          </div>
+
+        </div>
+      </div>
+    </form>
+
     </body>
 </html>
