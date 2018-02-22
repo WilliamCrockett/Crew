@@ -32,7 +32,7 @@ const addHandlers = () => {
   $('#signIn').on('submit', onSignIn)
   $('#signUpLink').on('click', toSignUp)
   $('#signInLink').on('click', toSignIn)
-  $('#td1').on('click', onRowClick)
+  $('#1').on('click', onRowClick)
 }
 
 module.exports = {
