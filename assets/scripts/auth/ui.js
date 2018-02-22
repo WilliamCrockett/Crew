@@ -16,8 +16,13 @@ const onToSignIn = function () {
   $('.sign-up-form').toggle()
 }
 
+const modalPopulate = function (targetID) {
+  $('#userID').text(targetID)
+}
+
 module.exports = {
   onSignInSuccess,
   onToSignUp,
-  onToSignIn
+  onToSignIn,
+  modalPopulate
 }

@@ -5,9 +5,7 @@ const ui = require('./ui.js')
 let targetID = ''
 
 const clickedID = function (event) {
-  alert(event.target)
-  targetID = (event.target.id)
-  alert(targetID)
+  targetID = (this.id)
 }
 
 const onSignIn = function (/* event */) {
@@ -23,16 +21,18 @@ const toSignIn = function () {
   ui.onToSignIn()
 }
 
-const onRowClick = function () {
-  alert('look at me now!')
+const onRowClick = function (targetID) {
+  ui.modalPopulate(targetID)
+  alert(targetID)
+  $('#EditCrewMember').modal('show')
 }
 
 const addHandlers = () => {
-  $('#contentTable').click(clickedID)
+  $('#contentTable tr').on('click', clickedID)
+  $('#contentTable').on('click', onRowClick)
   $('#signIn').on('submit', onSignIn)
   $('#signUpLink').on('click', toSignUp)
   $('#signInLink').on('click', toSignIn)
-  $('#1').on('click', onRowClick)
 }
 
 module.exports = {
