@@ -5,7 +5,7 @@ const ui = require('./ui.js')
 let targetID = ''
 
 const clickedID = function (event) {
-  alert(event.target.id)
+  alert(event.target)
   targetID = (event.target.id)
   alert(targetID)
 }
