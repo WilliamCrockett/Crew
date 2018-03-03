@@ -30,7 +30,7 @@ const onRowClick = function (targetID) {
 const addHandlers = () => {
   $('#contentTable tr').on('click', clickedID)
   $('#contentTable').on('click', onRowClick)
-  $('#signIn').on('submit', onSignIn)
+  $('#signIn').on('click', onSignIn)
   $('#signUpLink').on('click', toSignUp)
   $('#signInLink').on('click', toSignIn)
 }
