@@ -2,13 +2,7 @@
 
 const ui = require('./ui.js')
 
-let targetID = ''
-
-const clickedID = function (event) {
-  targetID = (this.id)
-}
-
-const onSignIn = function (/* event */) {
+const onSignIn = function (event) {
   event.preventDefault()
   ui.onSignInSuccess()
 }
@@ -21,15 +15,14 @@ const toSignIn = function () {
   ui.onToSignIn()
 }
 
-const onRowClick = function (targetID) {
-  ui.modalPopulate(targetID)
-  alert(targetID)
+const onRowClick = function (event) {
+  ui.modalPopulate(this.id)
+  alert(this.id)
   $('#EditCrewMember').modal('show')
 }
 
 const addHandlers = () => {
-  $('#contentTable tr').on('click', clickedID)
-  $('#contentTable').on('click', onRowClick)
+  $('#contentTable tr').on('click', onRowClick)
   $('#signIn').on('click', onSignIn)
   $('#signUpLink').on('click', toSignUp)
   $('#signInLink').on('click', toSignIn)
