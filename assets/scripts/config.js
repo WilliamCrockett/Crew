@@ -2,7 +2,9 @@
 
 const config = {
   apiOrigins: {
-    // production: 'https://ga-wdi-boston.herokuapp.com'
+    production: 'https://crew-tracker.herokuapp.com',
+    development: 'http://localhost:4741/'
+
   }
 }
 

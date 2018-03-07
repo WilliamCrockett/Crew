@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Crew</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -16,10 +16,11 @@
       <nav class="navbar navbar-default" id="navbar">
         <div class="container-fluid">
           <div class="navbar-header">
-              <h1>Example</h1>
+              <h1>Crew Tracker</h1>
               <button type="button" class="btn btn-default navbar-btn settings">Settings</button>
+              <button type="button" class="btn btn-default navbar-btn sign-out" id="signOut">Sign Out</button>
             <a class="navbar-brand" href="#">
-              <img alt="Brand" src="...">
+              <img alt="Brand" src="#">
             </a>
           </div>
         </div>
@@ -123,10 +124,11 @@
     </div>
 
         <!-- signin -->
-        <form class="sign-in-form" id="signIn">
+        <form class="sign-in-form" id="signInForm">
           <div class="col-md-4 sign-in-main row">
               <div class="sign-up">
                 <h2 class="sign-in">Sign In</h2>
+                  <div class="sign-in-error"><p>There was an error while signing in. Please check credentials and try again</p></div>
 
                   <div class="row">
                     <label for="Emaill Address" class="col-sm-3 control-label pad-5">Email Address</label>
@@ -143,7 +145,7 @@
                 </div>
 
                 <div class="sign-in pad-5">
-                  <button type="submit" class="btn btn-default btn-sign-in pad-5">Sign In</button>
+                  <button type="submit" class="btn btn-default btn-sign-in pad-5" id="signInButton">Sign In</button>
                   <h6>Not a member? <a class="signup-link" id="signUpLink">Sign-up!</a></h6>
                 </div>
               </div>
@@ -151,10 +153,11 @@
         </form>
 
     <!-- signup -->
-      <form class="sign-up-form">
+      <form class="sign-up-form" id="signUpForm">
         <div class="col-md-4 sign-up-main">
           <div class="sign-up">
             <h2 class="sign-up">Sign Up</h2>
+            <div class="sign-up-error"><p>There was an error while signing up. Please check credentials and try again</p></div>
             <label for="Emaill Address" class="col-sm-3 control-label pad-5">Email Address</label>
             <div class="col-sm-9 pad-5">
               <input type="email" name="credentials[email]" class="form-control" id="newCrewEmail" placeholder="Email Address">
@@ -171,7 +174,7 @@
             </div>
 
             <div class="sign-up pad-5">
-              <button type="submit" class="btn btn-default btn-sign-up pad-5">Sign up</button>
+              <button type="submit" class="btn btn-default btn-sign-up pad-5" id="signUpButton">Sign up</button>
               <h6>Back to <a class="signin-link" id="signInLink">Sign-in?</a></h6>
             </div>
           </div>
