@@ -3,7 +3,7 @@
 const store = require('../store')
 
 const onSignInSuccess = function (data) {
-  $('#signIn').toggle()
+  $('#signInForm').toggle() // if this isn't signInForm then ffs cause I changed it
   $('.sign-in-error').css('display', 'none')
   $('.navbar').toggle()
   $('.main-section').toggle()
@@ -15,7 +15,7 @@ const onSignInFailure = function () {
 }
 
 const onSignOutSuccess = function () {
-  $('#signIn').toggle()
+  $('#signInForm').toggle() // this to ffs
   $('.navbar').toggle()
   $('.main-section').toggle()
 }
