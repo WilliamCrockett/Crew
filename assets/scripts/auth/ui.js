@@ -42,6 +42,14 @@ const onToSignIn = function () {
   $('.sign-in-error').css('display', 'none')
 }
 
+const onChangePasswordSuccess = function () {
+  alert('hi onChangePasswordSuccess') // TODO fix this
+}
+
+const onChangePasswordFailure = function () {
+  alert('hi onChangePasswordFailure') // TODO fix this
+}
+
 module.exports = {
   onSignInSuccess,
   onSignUpSuccess,
@@ -49,5 +57,7 @@ module.exports = {
   onToSignUp,
   onSignInFailure,
   onSignUpFailure,
-  onSignOutSuccess
+  onSignOutSuccess,
+  onChangePasswordSuccess,
+  onChangePasswordFailure
 }

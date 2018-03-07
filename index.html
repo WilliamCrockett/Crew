@@ -17,7 +17,8 @@
         <div class="container-fluid">
           <div class="navbar-header">
               <h1>Crew Tracker</h1>
-              <button type="button" class="btn btn-default navbar-btn settings">Settings</button>
+              <button type="button" class="btn btn-default navbar-btn settings" data-toggle="modal" data-target="#editUserSettings">Settings</button>
+              <button type="button" class="btn btn-default navbar-btn boat-profile" data-toggle="modal" data-target="#editBoatDetails">Boat Profile</button>
               <button type="button" class="btn btn-default navbar-btn sign-out" id="signOut">Sign Out</button>
             <a class="navbar-brand" href="#">
               <img alt="Brand" src="#">
@@ -34,8 +35,12 @@
         </button>
         <button class="btn btn-default new-event" type="submit">New event</button>
       </div>
+
+      <!-- Just for gees -->
       <hr>
 
+      <!-- crew content table -->
+      <!-- event handler added for on row click -->
       <div class="content-table" id="contentTable">
         <table class="table table-striped table-hover">
           <!-- placeholders -->
@@ -58,6 +63,7 @@
       </div>
 
       <!-- modal add new crew member -->
+      <!-- event handler added onf orm submit -->
       <div class="modal fade" id="NewCrewMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -67,7 +73,7 @@
             </div>
             <div class="modal-body">
               <!--  Modal form -->
-              <form class="form-horizontal" id="signUp">
+              <form class="form-horizontal" id="addNewCrewMember">
                 <div class="form-group">
 
                   <label for="inputName" class="col-sm-3 control-label">Full Name</label>
@@ -121,10 +127,11 @@
           </div>
         </div>
       </div>
-    </div>
+      </div>
 
-        <!-- signin -->
-        <form class="sign-in-form" id="signInForm">
+      <!-- signIn -->
+      <!-- event handler added on form submit -->
+      <form class="sign-in-form" id="signInForm">
           <div class="col-md-4 sign-in-main row">
               <div class="sign-up">
                 <h2 class="sign-in">Sign In</h2>
@@ -133,14 +140,14 @@
                   <div class="row">
                     <label for="Emaill Address" class="col-sm-3 control-label pad-5">Email Address</label>
                     <div class="col-sm-9 pad-5">
-                      <input type="email" name="credentials[email]" class="form-control" id="newCrewEmail" placeholder="Email Address">
+                      <input type="email" name="credentials[email]" class="form-control" id="signInEmail" placeholder="Email Address">
                     </div>
                   </div>
 
                   <div class="row">
                     <label for="inputPassword3" class="col-sm-3 control-label pad-5">Password</label>
                     <div class="col-sm-9 pad-5">
-                      <input type="password" name="credentials[password]" class="form-control" id="changePassword" placeholder="Password">
+                      <input type="password" name="credentials[password]" class="form-control" id="inputPassword" placeholder="Password">
                     </div>
                 </div>
 
@@ -152,7 +159,8 @@
           </div>
         </form>
 
-    <!-- signup -->
+      <!-- signUp -->
+      <!-- event handler added onf orm submit -->
       <form class="sign-up-form" id="signUpForm">
         <div class="col-md-4 sign-up-main">
           <div class="sign-up">
@@ -160,7 +168,7 @@
             <div class="sign-up-error"><p>There was an error while signing up. Please check credentials and try again</p></div>
             <label for="Emaill Address" class="col-sm-3 control-label pad-5">Email Address</label>
             <div class="col-sm-9 pad-5">
-              <input type="email" name="credentials[email]" class="form-control" id="newCrewEmail" placeholder="Email Address">
+              <input type="email" name="credentials[email]" class="form-control" id="signUpEmail" placeholder="Email Address">
             </div>
 
             <label for="inputPassword3" class="col-sm-3 control-label pad-5">Password</label>
@@ -182,6 +190,7 @@
       </form>
 
       <!-- modal edit exisitng crew member -->
+      <!-- event handler added on form submit-->
       <div class="modal fade" id="EditCrewMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -191,37 +200,37 @@
             </div>
             <div class="modal-body">
               <!--  Modal form -->
-              <form class="form-horizontal" id="signUp">
+              <form class="form-horizontal" id="editExistingCrewMember">
                 <div class="form-group">
 
                   <label for="inputName" class="col-sm-3 control-label">Full Name</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="text" name="person[name]" class="form-control" id="newCrewName" placeholder="Full Name">
+                    <input type="text" name="person[name]" class="form-control" id="existingCrewName" placeholder="Full Name">
                   </div>
 
                   <label for="SAS Number" class="col-sm-3 control-label">SAS Number</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="text" name="person[sasnumber]" class="form-control" id="newCrewSASNumber" placeholder="SAS Number">
+                    <input type="text" name="person[sasnumber]" class="form-control" id="existingCrewSASNumber" placeholder="SAS Number">
                   </div>
 
                   <label for="Emaill Address" class="col-sm-3 control-label">Email Address</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="email" name="person[email]" class="form-control" id="newCrewEmail" placeholder="Email Address">
+                    <input type="email" name="person[email]" class="form-control" id="exisitngCrewEmail" placeholder="Email Address">
                   </div>
 
                   <label for="Cellphone Number" class="col-sm-3 control-label">Cell Number</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="tel" name="person[tel]" class="form-control" id="newCrewTellNumber" placeholder="083 123 4567">
+                    <input type="tel" name="person[tel]" class="form-control" id="exisitngCrewTellNumber" placeholder="083 123 4567">
                   </div>
 
                   <label for="NoKName" class="col-sm-3 control-label">Next of Kin Name</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="text" name="person[NOKName]" class="form-control" id="newCrewNOKName" placeholder="Full Name">
+                    <input type="text" name="person[NOKName]" class="form-control" id="exisitngCrewNOKName" placeholder="Full Name">
                   </div>
 
                   <label for="Cellphone Number" class="col-sm-3 control-label">NOK Cell Number</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="tel" name="person[NOKtel]" class="form-control" id="newCrewNOKTellNumber" placeholder="083 123 4567">
+                    <input type="tel" name="person[NOKtel]" class="form-control" id="exisitngCrewNOKTellNumber" placeholder="083 123 4567">
                   </div>
 
                   <label for="Shirt Size" class="col-sm-3 control-label">Shirt Size</label>
@@ -237,7 +246,7 @@
                   </div>
 
                   <div class="col-sm-offset-2 col-sm-10 add-crew-btn">
-                    <button type="submit" class="btn btn-default">Save Changes</button>
+                    <button type="submit" class="btn btn-default" id="saveChangesToExistingCrewMember">Save Changes</button>
                   </div>
                 </div>
               </form>
@@ -245,6 +254,82 @@
           </div>
         </div>
       </div>
+
+      <!-- modal edit boat details -->
+      <!-- event handler added on form submit-->
+      <div class="modal fade" id="editBoatDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Edit Boat Details</h4>
+            </div>
+            <div class="modal-body">
+              <!--  Modal form -->
+              <form class="form-horizontal" id="editBoatDetailsForm">
+                <div class="form-group">
+
+                  <label for="inputName" class="col-sm-3 control-label">Boat Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="boat[name]" class="form-control" id="exisitngBoatName" placeholder="Boat Name">
+                  </div>
+
+                  <label for="inputName" class="col-sm-3 control-label">Owner Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="boat[ownerName]" class="form-control" id="exisitngOwnerName" placeholder="Owner Name">
+                  </div>
+
+                  <label for="inputName" class="col-sm-3 control-label">Skipper Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="boat[skipperName]" class="form-control" id="existingSkipperName" placeholder="Skipper Name">
+                  </div>
+
+                  <label for="inputName" class="col-sm-3 control-label">Number of Crew</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="number" name="boat[numCrew]" class="form-control" id="existingNumCrew" placeholder="Number of Crew">
+                  </div>
+
+                  <div class="col-sm-offset-2 col-sm-10 add-crew-btn">
+                    <button type="submit" class="btn btn-default" id="saveUpdatedBoatDetails">Save</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- modal edit user settings (basically change password at this point) -->
+      <div class="modal fade" id="editUserSettings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+            </div>
+            <div class="modal-body">
+              <!--  Modal form -->
+              <form class="form-horizontal" id="changePasswordForm">
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-3 control-label">Old password</label>
+                  <div class="col-sm-9">
+                    <input type="password" name="passwords[old]" class="form-control" id="changePasswordOld" placeholder="old password">
+                  </div>
+                  <label for="inputPassword3" class="col-sm-3 control-label">New password</label>
+                  <div class="col-sm-9">
+                    <input type="password" name="passwords[new]" class="form-control" id="changePasswordNew" placeholder="new password">
+                  </div>
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Change Password</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
     </body>
 </html>

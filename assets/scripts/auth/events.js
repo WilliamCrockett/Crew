@@ -36,10 +36,18 @@ const onSignOut = function () { // TODO clear all form fields EVERYWHERE
     .catch(ui.onSignOutFailure) // TODO
 }
 
-const onRowClick = function (event) { // TODO remove
-  ui.modalPopulate(this.id)
-  alert(this.id)
-  $('#EditCrewMember').modal('show')
+// const onRowClick = function (event) { // TODO remove
+//   ui.modalPopulate(this.id)
+//   alert(this.id)
+//   $('#EditCrewMember').modal('show')
+// }
+
+const onChangePassword = function (event) {
+  event.preventDefault()
+  const data = getFormFields(this)
+  api.changePassword(data)
+    .then(ui.onChangePasswordSuccess)
+    .catch(ui.onChangePasswordFailure)
 }
 
 const addHandlers = () => {
@@ -49,10 +57,10 @@ const addHandlers = () => {
   $('#signUpLink').on('click', toSignUp)
   $('#signInLink').on('click', toSignIn)
   $('#signOut').on('click', onSignOut)
+  $('#changePasswordForm').on('submit', onChangePassword)
 }
 
 module.exports = {
   addHandlers,
-  toSignIn,
-  onRowClick
+  toSignIn
 }
