@@ -3,7 +3,10 @@
 // TODO still need to add change password funcionality
 const ui = require('./ui.js')
 const api = require('./api.js')
+const appAPI = require('../app/api.js')
+const appUI = require('../app/ui.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
+const store = require('../store.js') // remove
 
 const onSignIn = function (event) {
   event.preventDefault()
@@ -11,6 +14,10 @@ const onSignIn = function (event) {
   api.signIn(data)
     .then(ui.onSignInSuccess)
     .catch(ui.onSignInFailure)
+    .then(appAPI.getAll)
+    .then(appUI.populateTableWithIndex)
+    .catch(appUI.populateTableWithIndexFailure)
+  console.log(store.user)
 }
 
 const toSignUp = function () {

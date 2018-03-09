@@ -17,7 +17,7 @@
         <div class="container-fluid">
           <div class="navbar-header">
               <h1>Crew Tracker</h1>
-              <button type="button" class="btn btn-default navbar-btn settings" data-toggle="modal" data-target="#editUserSettings">Settings</button>
+              <button type="button" class="btn btn-default navbar-btn settings" data-toggle="modal" data-target="#editUserSettings" id="settingsButton">Settings</button>
               <button type="button" class="btn btn-default navbar-btn boat-profile" data-toggle="modal" data-target="#editBoatDetails">Boat Profile</button>
               <button type="button" class="btn btn-default navbar-btn sign-out" id="signOut">Sign Out</button>
             <a class="navbar-brand" href="#">
@@ -33,7 +33,7 @@
         <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#NewCrewMember" id="add-new-crew-member">
           New crew member
         </button>
-        <button class="btn btn-default new-event" type="submit">New event</button>
+        <button class="btn btn-default new-event" type="submit" id="NewEventButton">New event</button>
       </div>
 
       <!-- Just for gees -->
@@ -42,22 +42,16 @@
       <!-- crew content table -->
       <!-- event handler added for on row click -->
       <div class="content-table" id="contentTable">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover" id="crewsTable">
           <!-- placeholders -->
-          <tr id="1">
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr id="2">
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr id="3">
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
+          <tr class='header_row'>
+            <td>Full Name</td>
+            <td>SAS Number</td>
+            <td>Email Address</td>
+            <td>Cell Number</td>
+            <td>Next of Kin</td>
+            <td>NoK Cell Number</td>
+            <td>Shirt Size</td>
           </tr>
         </table>
       </div>
@@ -78,37 +72,37 @@
 
                   <label for="inputName" class="col-sm-3 control-label">Full Name</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="text" name="person[name]" class="form-control" id="newCrewName" placeholder="Full Name">
+                    <input type="text" name="crew[full_name]" class="form-control" id="newCrewName" placeholder="Full Name">
                   </div>
 
                   <label for="SAS Number" class="col-sm-3 control-label">SAS Number</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="text" name="person[sasnumber]" class="form-control" id="newCrewSASNumber" placeholder="SAS Number">
+                    <input type="text" name="crew[sas_number]" class="form-control" id="newCrewSASNumber" placeholder="SAS Number">
                   </div>
 
                   <label for="Emaill Address" class="col-sm-3 control-label">Email Address</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="email" name="person[email]" class="form-control" id="newCrewEmail" placeholder="Email Address">
+                    <input type="email" name="crew[email_address]" class="form-control" id="newCrewEmail" placeholder="Email Address">
                   </div>
 
                   <label for="Cellphone Number" class="col-sm-3 control-label">Cell Number</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="tel" name="person[tel]" class="form-control" id="newCrewTellNumber" placeholder="083 123 4567">
+                    <input type="tel" name="crew[cell_number]" class="form-control" id="newCrewTellNumber" placeholder="083 123 4567">
                   </div>
 
                   <label for="NoKName" class="col-sm-3 control-label">Next of Kin Name</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="text" name="person[NOKName]" class="form-control" id="newCrewNOKName" placeholder="Full Name">
+                    <input type="text" name="crew[next_of_kin]" class="form-control" id="newCrewNOKName" placeholder="Full Name">
                   </div>
 
                   <label for="Cellphone Number" class="col-sm-3 control-label">NOK Cell Number</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="tel" name="person[NOKtel]" class="form-control" id="newCrewNOKTellNumber" placeholder="083 123 4567">
+                    <input type="tel" name="crew[nok_cell_num]" class="form-control" id="newCrewNOKTellNumber" placeholder="083 123 4567">
                   </div>
 
                   <label for="Shirt Size" class="col-sm-3 control-label">Shirt Size</label>
                   <div class="col-sm-9 pad-5">
-                    <select name="shirt-size">
+                    <select name="crew[shirt_size]">
                       <option value="Small">Small</option>
                       <option value="Medium">Medium</option>
                       <option value="Large">Large</option>
@@ -205,37 +199,37 @@
 
                   <label for="inputName" class="col-sm-3 control-label">Full Name</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="text" name="person[name]" class="form-control" id="existingCrewName" placeholder="Full Name">
+                    <input type="text" name="crew[full_name]" class="form-control" id="editCrewName" placeholder="Full Name">
                   </div>
 
                   <label for="SAS Number" class="col-sm-3 control-label">SAS Number</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="text" name="person[sasnumber]" class="form-control" id="existingCrewSASNumber" placeholder="SAS Number">
+                    <input type="text" name="crew[sas_number]" class="form-control" id="editCrewSASNumber" placeholder="SAS Number">
                   </div>
 
                   <label for="Emaill Address" class="col-sm-3 control-label">Email Address</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="email" name="person[email]" class="form-control" id="exisitngCrewEmail" placeholder="Email Address">
+                    <input type="email" name="crew[email_address]" class="form-control" id="editCrewEmail" placeholder="Email Address">
                   </div>
 
                   <label for="Cellphone Number" class="col-sm-3 control-label">Cell Number</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="tel" name="person[tel]" class="form-control" id="exisitngCrewTellNumber" placeholder="083 123 4567">
+                    <input type="tel" name="crew[cell_number]" class="form-control" id="editCrewTellNumber" placeholder="083 123 4567">
                   </div>
 
                   <label for="NoKName" class="col-sm-3 control-label">Next of Kin Name</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="text" name="person[NOKName]" class="form-control" id="exisitngCrewNOKName" placeholder="Full Name">
+                    <input type="text" name="crew[next_of_kin]" class="form-control" id="editCrewNOKName" placeholder="Full Name">
                   </div>
 
                   <label for="Cellphone Number" class="col-sm-3 control-label">NOK Cell Number</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="tel" name="person[NOKtel]" class="form-control" id="exisitngCrewNOKTellNumber" placeholder="083 123 4567">
+                    <input type="tel" name="crew[nok_cell_num]" class="form-control" id="editCrewNOKTellNumber" placeholder="083 123 4567">
                   </div>
 
                   <label for="Shirt Size" class="col-sm-3 control-label">Shirt Size</label>
                   <div class="col-sm-9 pad-5">
-                    <select name="shirt-size">
+                    <select name="crew[shirt_size]" id="editCrewShirtSize">
                       <option value="Small">Small</option>
                       <option value="Medium">Medium</option>
                       <option value="Large">Large</option>
@@ -307,6 +301,7 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+              <div class="change-password-error"><p>There was an error while signing in. Please check credentials and try again</p></div>
             </div>
             <div class="modal-body">
               <!--  Modal form -->

@@ -1,12 +1,31 @@
 'use strict'
 
 const store = require('../store')
+require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.js')
+require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.css')
 
 const onSignInSuccess = function (data) {
   $('#signInForm').toggle() // if this isn't signInForm then ffs cause I changed it
   $('.sign-in-error').css('display', 'none')
   $('.navbar').toggle()
   $('.main-section').toggle()
+  $.toast({
+    text: "You're now logged in!",
+    heading: 'Welcome to Crew',
+    icon: 'success',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+
+  $('#signInForm').each(function () {
+    this.reset()
+  })
   store.user = data.user
 }
 
@@ -18,6 +37,19 @@ const onSignOutSuccess = function () {
   $('#signInForm').toggle() // this to ffs
   $('.navbar').toggle()
   $('.main-section').toggle()
+  $.toast({
+    text: "You're now logged out!",
+    heading: 'See you next time',
+    icon: 'success',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
 }
 
 const onToSignUp = function () {
@@ -30,6 +62,23 @@ const onSignUpSuccess = function () {
   $('.sign-in-form').toggle()
   $('.sign-up-error').css('display', 'none')
   $('.sign-up-form').toggle()
+  $.toast({
+    text: 'Please sign in now!',
+    heading: 'Thanks for signing up',
+    icon: 'success',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+
+  $('.sign-up-form').each(function () {
+    this.reset()
+  })
 }
 
 const onSignUpFailure = function () {
@@ -43,11 +92,27 @@ const onToSignIn = function () {
 }
 
 const onChangePasswordSuccess = function () {
-  alert('hi onChangePasswordSuccess') // TODO fix this
+  $('#editUserSettings').modal('hide')
+  $.toast({
+    text: "Don't forget it now!",
+    heading: 'Password changed successfully!',
+    icon: 'success',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+  $('#editUserSettings').each(function () {
+    this.reset()
+  })
 }
 
 const onChangePasswordFailure = function () {
-  alert('hi onChangePasswordFailure') // TODO fix this
+  $('.change-password-error').css('display', 'block')
 }
 
 module.exports = {
