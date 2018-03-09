@@ -66,12 +66,17 @@ const showModalDeleteConfirm = function (event) {
   $('#confirmDelete').modal('show')
 }
 
+const onNewEvent = function (event) {
+  event.preventDefault()
+  console.log('in onNewEvent')
+}
+
 const addHandlers = () => {
   $('#contentTable').on('click', '.crew_row', onRowClick)
   $('#editBoatDetailsForm').on('submit', onSaveUpdatedBoatDetails)
   $('#editExistingCrewMember').on('submit', onEditExistingCrewMember)
   $('#addNewCrewMember').on('submit', onAddNewCrewMember)
-  $('#NewEventButton').on('click', populateTable)
+  $('#NewEventButton').on('click', onNewEvent)
   $('#contentTable').on('click', '.delete_record', showModalDeleteConfirm)
   $('#deleteRecordConfirmation').on('click', deleteCrewRecord)
   // $('.delete_record').on('click', deleteCrewRecord)
