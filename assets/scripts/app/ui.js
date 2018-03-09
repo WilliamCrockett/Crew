@@ -102,13 +102,10 @@ const onRowClickError = function () {
 }
 
 const populateTableWithIndex = function (data) {
-  console.log('populateTableWithIndex')
   const allCrew = data
-  console.log(allCrew)
   const showCrewsHtml = showCrewsTemplate({ crews: data.crews })
   $('#crewsTable tbody').empty()
   $('#crewsTable tbody').append(showCrewsHtml)
-  console.log(allCrew)
 }
 
 const populateTableWithIndexFailure = function () {
@@ -116,6 +113,22 @@ const populateTableWithIndexFailure = function () {
     text: 'Theres a problem getting all the crew',
     heading: 'Error, sorry!',
     icon: 'error',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+}
+
+const onDeleteRecordSuccess = function () {
+  $.toast({
+    text: 'Crew member successfully deleted',
+    heading: 'Success!',
+    icon: 'success',
     showHideTransition: 'plain',
     allowToastClose: true,
     hideAfter: 3000,
@@ -135,5 +148,6 @@ module.exports = {
   onUpdateExisitngCrewMemberFailure,
   onRowClickError,
   populateTableWithIndex,
-  populateTableWithIndexFailure
+  populateTableWithIndexFailure,
+  onDeleteRecordSuccess
 }

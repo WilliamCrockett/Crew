@@ -48,9 +48,21 @@ const getAll = function () {
   })
 }
 
+const deleteCrewMember = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/crews/' + id,
+    method: 'DELETE',
+    headers: {
+      contentType: 'application/json',
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   onNewCrew,
   getCrewByID,
   onEditCrewMember,
-  getAll
+  getAll,
+  deleteCrewMember
 }

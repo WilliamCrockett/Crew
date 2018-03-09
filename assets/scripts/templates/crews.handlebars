@@ -6,6 +6,7 @@
   <td>Next of Kin</td>
   <td>NoK Cell Number</td>
   <td>Shirt Size</td>
+  <td>Delete</td>
 </tr>
 
 {{#each crews as |crew|}}
@@ -18,6 +19,7 @@
    <td>{{crew.next_of_kin}}</td>
    <td>{{crew.nok_cell_num}}</td>
    <td>{{crew.shirt_size}}</td>
+   <td><button class="btn btn-default delete_record" data-id="{{crew.id}}">Delete?</span></td>
  </tr>
 
 

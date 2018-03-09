@@ -4,6 +4,8 @@ const ui = require('./ui.js')
 const api = require('./api.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
 
+let dataID = 0
+
 const onRowClick = function (event) {
   const id = $(this).attr('data-id')
   api.getCrewByID(id)
@@ -12,8 +14,7 @@ const onRowClick = function (event) {
 }
 
 const onSaveUpdatedBoatDetails = function (event) {
-  alert('hi onSaveUpdatedBoatDetails')
-  event.preventDefault()
+  event.preventDefault() // TODO post MVP
 }
 
 const onEditExistingCrewMember = function (event) {
@@ -40,11 +41,29 @@ const onAddNewCrewMember = function (event) {
 }
 
 const populateTable = function () {
-  console.log('in populateTable')
   event.preventDefault()
   api.getAll()
     .then(ui.populateTableWithIndex)
     .catch(ui.populateTableWithIndexFailure)
+}
+
+const deleteCrewRecord = function (event) {
+  event.preventDefault()
+  event.stopPropagation()
+  api.deleteCrewMember(dataID)
+    .then(ui.onDeleteRecordSuccess)
+    .catch(ui.onDeleteRecordFailure) // TODO
+    .then(api.getAll)
+    .then(ui.populateTableWithIndex)
+    .catch(ui.populateTableWithIndexFailure)
+  $('#confirmDelete').modal('hide')
+}
+
+const showModalDeleteConfirm = function (event) {
+  event.stopPropagation()
+  dataID = $(this).attr('data-id')
+  $('#userIDDelete').text(dataID)
+  $('#confirmDelete').modal('show')
 }
 
 const addHandlers = () => {
@@ -53,6 +72,9 @@ const addHandlers = () => {
   $('#editExistingCrewMember').on('submit', onEditExistingCrewMember)
   $('#addNewCrewMember').on('submit', onAddNewCrewMember)
   $('#NewEventButton').on('click', populateTable)
+  $('#contentTable').on('click', '.delete_record', showModalDeleteConfirm)
+  $('#deleteRecordConfirmation').on('click', deleteCrewRecord)
+  // $('.delete_record').on('click', deleteCrewRecord)
   // leave this one at the bottom
   $('#settingsButton').on('click', function () {
     $('.change-password-error').css('display', 'none')
