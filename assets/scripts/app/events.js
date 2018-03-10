@@ -5,12 +5,22 @@ const api = require('./api.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
 
 let dataID = 0
+const checkedValues = []
 
 const onRowClick = function (event) {
-  const id = $(this).attr('data-id')
-  api.getCrewByID(id)
-    .then(ui.onEditNewCrewMember)
-    .catch(ui.onRowClickError)
+  const currentDisplay = $('#eventsOrCrew').text()
+  if (currentDisplay === 'Events') {
+    const id = $(this).attr('data-id')
+    api.getCrewByID(id)
+      .then(ui.onEditNewCrewMember)
+      .catch(ui.onRowClickError)
+  } else if (currentDisplay === 'Crews') {
+    const id = $(this).attr('data-id')
+    console.log(id)
+    api.getEventByID(id)
+      .then(ui.onEditEvent) // TODO
+      .catch(ui.onEditEventError) // TODO
+  }
 }
 
 const onSaveUpdatedBoatDetails = function (event) {
@@ -66,9 +76,90 @@ const showModalDeleteConfirm = function (event) {
   $('#confirmDelete').modal('show')
 }
 
+const showNewEventModal = function (event) {
+  event.preventDefault()
+  $('#newEventModal').modal('show')
+}
+
 const onNewEvent = function (event) {
   event.preventDefault()
-  console.log('in onNewEvent')
+  const data = getFormFields(this)
+  api.createNewEvent(data)
+    .then(ui.onNewEventSuccess)
+    .catch(ui.onNewEventFailure)
+    .then(api.getAllEvents)
+    .then(ui.showEvents)
+    .catch(ui.getAllEventsError)
+    .then(getLastEventID)
+}
+
+const getLastEventID = function () {
+  api.getLastEvent()
+    .then(createNewEventCrew)
+    .catch()
+}
+
+const createNewEventCrew = function (data) {
+  console.log('here')
+  const currentEventId = data.event['id']
+  for (let i = 0; i < checkedValues.length; i++) {
+    const id = checkedValues[i]
+    const obj = { event_crews: {
+      event_id: currentEventId,
+      user_id: id
+    }
+    }
+    const thing = JSON.stringify(obj)
+    console.log(thing)
+    api.createEventCrews(thing)
+  }
+  console.log('at the end')
+}
+
+const onToggleBetweenEventsAndCrew = function (event) {
+  event.preventDefault()
+  const currentDisplay = $('#eventsOrCrew').text()
+  if (currentDisplay === 'Events') {
+    api.getAllEvents()
+      .then(ui.showEvents)
+      .catch(ui.getAllEventsError) // TODO
+  } else if (currentDisplay === 'Crews') {
+    api.getAll()
+      .then(ui.populateTableWithIndex)
+      .catch(ui.populateTableWithIndexFailure)
+    $('#eventsOrCrew').text('Events')
+  }
+}
+
+const showModalExportEvent = function (event) {
+  event.stopPropagation()
+  $('#exportEvent').modal('show')
+}
+
+const editEvent = function (event) {
+  event.preventDefault()
+  const data = getFormFields(this)
+  const id = $('#EventID').text()
+  api.onEditEvent(data, id)
+    .then(ui.onUpdateExisitngEventSuccess) // here
+    .catch(ui.onUpdateExisitngEventFailure)
+    .then(api.getAllEvents)
+    .then(ui.showEvents)
+    .catch(ui.getAllEventsError)
+}
+
+const onAddCrewToEvent = function () {
+  $('#addCrewToEvent').modal('show')
+  api.getAll()
+    .then(ui.onAddCrewToEventUI)
+    // .catch() TODO
+}
+
+const getCheckBoxValues = function () {
+  $('.crew-check-boxes:checked').each(function () {
+    checkedValues.push($(this).attr('data-id'))
+  })
+  $('#addCrewToEvent').modal('hide')
 }
 
 const addHandlers = () => {
@@ -76,9 +167,15 @@ const addHandlers = () => {
   $('#editBoatDetailsForm').on('submit', onSaveUpdatedBoatDetails)
   $('#editExistingCrewMember').on('submit', onEditExistingCrewMember)
   $('#addNewCrewMember').on('submit', onAddNewCrewMember)
-  $('#NewEventButton').on('click', onNewEvent)
+  $('#NewEventButton').on('click', showNewEventModal)
   $('#contentTable').on('click', '.delete_record', showModalDeleteConfirm)
   $('#deleteRecordConfirmation').on('click', deleteCrewRecord)
+  $('#addNewEvent').on('submit', onNewEvent)
+  $('#ToggleBetweenEventsAndCrew').on('click', onToggleBetweenEventsAndCrew)
+  $('#contentTable').on('click', '.export_crew_list', showModalExportEvent)
+  $('#editExistingEvent').on('submit', editEvent)
+  $('#addCrewToEventButton').on('click', onAddCrewToEvent)
+  $('#addThisSelectionToEvent').on('click', getCheckBoxValues)
   // $('.delete_record').on('click', deleteCrewRecord)
   // leave this one at the bottom
   $('#settingsButton').on('click', function () {

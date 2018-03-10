@@ -1,6 +1,8 @@
 'use strict'
 
 const showCrewsTemplate = require('../templates/crews.handlebars')
+const showEventsTemplate = require('../templates/events.handlebars')
+const addCrewToEventTemplate = require('../templates/selectCrews.handlebars')
 require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.js')
 require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.css')
 
@@ -140,6 +142,114 @@ const onDeleteRecordSuccess = function () {
   })
 }
 
+const showEvents = function (data) {
+  $('#eventsOrCrew').text('Crews')
+  console.log(data)
+  console.log(data.events)
+  const showEventsHtml = showEventsTemplate({ events: data.events })
+  $('#crewsTable tbody').empty()
+  $('#crewsTable tbody').append(showEventsHtml)
+}
+
+const onNewEventSuccess = function (data) {
+  $('#addNewEvent').each(function () {
+    this.reset()
+  })
+  $('#newEventModal').modal('hide')
+  $.toast({
+    text: "You've added a new event!",
+    heading: 'Success!',
+    icon: 'success',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+}
+
+const onNewEventFailure = function () {
+  $.toast({
+    text: 'There was a problem adding this event. Please try again',
+    heading: 'Error!',
+    icon: 'error',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+}
+
+const getAllEventsError = function () {
+  $.toast({
+    text: 'There was a problem getting all events. Please try again',
+    heading: 'Error!',
+    icon: 'error',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+}
+
+const onEditEvent = function (data) {
+  $('#editEventName').val(data.event['name'])
+  $('#editEventDate').val(data.event['event_date'])
+  $('#EventID').text(data.event['id'])
+  $('#editEventModal').modal('show')
+}
+
+const onUpdateExisitngEventSuccess = function (data) {
+  $('#editEventModal').modal('hide')
+  $.toast({
+    text: 'Event details updated successfully',
+    heading: 'Success!',
+    icon: 'success',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+}
+
+const onUpdateExisitngEventFailure = function () {
+  $.toast({
+    text: 'There was a problem while trying to update this',
+    heading: 'Error!',
+    icon: 'error',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+}
+
+const onAddCrewToEventUI = function (data) {
+  // const allCrew = data
+  const showCrewsHtml = addCrewToEventTemplate({ crews: data.crews })
+  $('#crewListInputBox').empty()
+  $('#crewListInputBox').append(showCrewsHtml)
+}
+
 module.exports = {
   onAddNewCrewMemberError,
   onAddNewCrewMemberSuccess,
@@ -149,5 +259,13 @@ module.exports = {
   onRowClickError,
   populateTableWithIndex,
   populateTableWithIndexFailure,
-  onDeleteRecordSuccess
+  onDeleteRecordSuccess,
+  showEvents,
+  onNewEventSuccess,
+  onNewEventFailure,
+  getAllEventsError,
+  onEditEvent,
+  onUpdateExisitngEventSuccess,
+  onUpdateExisitngEventFailure,
+  onAddCrewToEventUI
 }

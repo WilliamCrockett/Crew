@@ -34,6 +34,7 @@
           New crew member
         </button>
         <button class="btn btn-default new-event" type="submit" id="NewEventButton">New event</button>
+        <button class="btn btn-default new-event" type="submit" id="ToggleBetweenEventsAndCrew">Show <span id="eventsOrCrew">Events</span></button>
       </div>
 
       <!-- Just for gees -->
@@ -325,7 +326,7 @@
         </div>
       </div>
 
-
+      <!-- Delete record confirmation -->
       <div class="modal fade" tabindex="-1" role="dialog" id="confirmDelete">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -343,6 +344,98 @@
           </div>
         </div>
       </div>
+
+      <!-- add new event -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="newEventModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Add new event</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" id="addNewEvent">
+                <label for="inputName" class="col-sm-3 control-label">Event Name</label>
+                <!-- TODO fix this styling -->
+                <div class="col-sm-9 pad-5">
+                  <input type="text" name="event[name]" class="form-control" id="newEventName" placeholder="Event Name">
+                </div>
+                <label for="inputDate" class="col-sm-3 control-label">Event date</label>
+                <div class="col-sm-9 pad-5">
+                  <input type="date" name="event[event_date]" class="form-control">
+                </div>
+                <button type="button" class="btn btn-primary" id="addCrewToEventButton">Add Crew to this event</button>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" id="createNewEventButton">Yeah bro, doit toit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- edit event -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="editEventModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Edit event: ID: <span id=EventID></span></h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" id="editExistingEvent">
+                <label for="inputName" class="col-sm-3 control-label">Event Name</label>
+                <!-- TODO fix this styling -->
+                <div class="col-sm-9 pad-5">
+                  <input type="text" name="event[name]" class="form-control" id="editEventName" placeholder="Event Name">
+                </div>
+                <label for="inputDate" class="col-sm-3 control-label">Event date</label>
+                <div class="col-sm-9 pad-5">
+                  <input type="date" name="event[event_date]" class="form-control" id="editEventDate">
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" id="editEventButton">Yeah bro, doit toit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- export crew list -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="exportEvent">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Export Crew List for event with ID: <span>"UserID"</span></h4>
+            </div>
+            <div class="modal-body">
+              <p>Feature coming soon...</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Nope, I changed my mind</button>
+              <button type="button" class="btn btn-primary" >Yeah bro, doit toit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- add crew to event -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="addCrewToEvent">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Add Crew To event with ID: <span>"UserID"</span></h4>
+            </div>
+            <div class="modal-body" id="crewListInputBox">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="addThisSelectionToEvent">Add these crew to this event</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
 
     </body>

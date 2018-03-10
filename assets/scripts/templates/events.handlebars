@@ -1,0 +1,16 @@
+<tr class='header_row'>
+  <td>Event Name</td>
+  <td>Event Date</td>
+  <td>Export Crew List</td>
+</tr>
+
+{{#each events as |event|}}
+
+ <tr class ="crew_row" data-id="{{event.id}}">
+   <td>{{event.name}}</td>
+   <td>{{event.event_date}}</td>
+    <td><button class="btn btn-default export_crew_list" data-id="{{event.id}}">Export?</span></td>
+ </tr>
+
+
+{{/each}}

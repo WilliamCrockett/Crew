@@ -1,0 +1,8 @@
+{{#each crews as |crew|}}
+
+
+<label class="checkbox-inline">
+<td><input class="col-md-2 pad-5 crew-check-boxes" type="checkbox" data-id="{{crew.id}}" value="{{crew.full_name}}">{{crew.full_name}}</td>
+</label>
+
+{{/each}}
