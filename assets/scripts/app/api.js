@@ -116,16 +116,25 @@ const getLastEvent = function () {
   })
 }
 
-const createEventCrews = function (data) {
+const createEventCrews = function (eID, cID) {
   return $.ajax({
-    url: config.apiOrigin + '/events',
+    url: config.apiOrigin + '/event_crews',
     method: 'POST',
     headers: {
       contentType: 'application/json',
       Authorization: 'Token token=' + store.user.token
     },
-    data
+    data: {
+      event_crew: {
+        "event_id": eID,
+        "crew_id": cID
+      }
+    }
   })
+}
+
+const getEventCrewsByEventID = function () {
+
 }
 
 module.exports = {
@@ -139,5 +148,6 @@ module.exports = {
   getEventByID,
   onEditEvent,
   getLastEvent,
-  createEventCrews
+  createEventCrews,
+  getEventCrewsByEventID
 }

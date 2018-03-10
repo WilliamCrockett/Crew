@@ -18,8 +18,8 @@ const onRowClick = function (event) {
     const id = $(this).attr('data-id')
     console.log(id)
     api.getEventByID(id)
-      .then(ui.onEditEvent) // TODO
-      .catch(ui.onEditEventError) // TODO
+      .then(ui.onEditEvent)
+      .catch(ui.onEditEventError)
   }
 }
 
@@ -100,20 +100,13 @@ const getLastEventID = function () {
 }
 
 const createNewEventCrew = function (data) {
-  console.log('here')
   const currentEventId = data.event['id']
   for (let i = 0; i < checkedValues.length; i++) {
-    const id = checkedValues[i]
-    const obj = { event_crews: {
-      event_id: currentEventId,
-      user_id: id
-    }
-    }
-    const thing = JSON.stringify(obj)
-    console.log(thing)
-    api.createEventCrews(thing)
+    const crewId = checkedValues[i]
+    api.createEventCrews(currentEventId, crewId)
+      .then(ui.addCrewToEventCrewSuccess)
+      .catch(ui.addCrewToEventCrewError)
   }
-  console.log('at the end')
 }
 
 const onToggleBetweenEventsAndCrew = function (event) {
@@ -134,6 +127,7 @@ const onToggleBetweenEventsAndCrew = function (event) {
 const showModalExportEvent = function (event) {
   event.stopPropagation()
   $('#exportEvent').modal('show')
+  // api.getEventCrewsByEventID()
 }
 
 const editEvent = function (event) {
@@ -152,7 +146,7 @@ const onAddCrewToEvent = function () {
   $('#addCrewToEvent').modal('show')
   api.getAll()
     .then(ui.onAddCrewToEventUI)
-    // .catch() TODO
+    .catch(ui.addCrewToEventCrewError)
 }
 
 const getCheckBoxValues = function () {

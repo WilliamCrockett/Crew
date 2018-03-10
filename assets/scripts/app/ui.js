@@ -5,6 +5,7 @@ const showEventsTemplate = require('../templates/events.handlebars')
 const addCrewToEventTemplate = require('../templates/selectCrews.handlebars')
 require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.js')
 require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.css')
+// require('../../../node_modules/bootstrap-select/js/bootstrap-select.js')
 
 const onEditNewCrewMember = function (data) {
   $('#editCrewName').val(data.crew['full_name'])
@@ -12,7 +13,7 @@ const onEditNewCrewMember = function (data) {
   $('#editCrewEmail').val(data.crew['email_address'])
   $('#editCrewTellNumber').val(data.crew['cell_number'])
   $('#editCrewNOKName').val(data.crew['next_of_kin'])
-  $('#editCrewNOKTellNumber').val(data.crew['nok_cell_num']) // dont forget to add shirt size TODO
+  $('#editCrewNOKTellNumber').val(data.crew['nok_cell_num'])
   $('#editCrewShirtSize').val(data.crew['shirt_size'])
   $('#userID').text(data.crew['id'])
   $('#EditCrewMember').modal('show')
@@ -104,7 +105,7 @@ const onRowClickError = function () {
 }
 
 const populateTableWithIndex = function (data) {
-  const allCrew = data
+  // const allCrew = data
   const showCrewsHtml = showCrewsTemplate({ crews: data.crews })
   $('#crewsTable tbody').empty()
   $('#crewsTable tbody').append(showCrewsHtml)
@@ -210,6 +211,22 @@ const onEditEvent = function (data) {
   $('#editEventModal').modal('show')
 }
 
+const onEditEventError = function () {
+  $.toast({
+    text: 'There was a problem trying to get this event',
+    heading: 'Error!',
+    icon: 'error',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+}
+
 const onUpdateExisitngEventSuccess = function (data) {
   $('#editEventModal').modal('hide')
   $.toast({
@@ -244,10 +261,41 @@ const onUpdateExisitngEventFailure = function () {
 }
 
 const onAddCrewToEventUI = function (data) {
-  // const allCrew = data
   const showCrewsHtml = addCrewToEventTemplate({ crews: data.crews })
   $('#crewListInputBox').empty()
   $('#crewListInputBox').append(showCrewsHtml)
+}
+
+const addCrewToEventCrewSuccess = function () {
+  $.toast({
+    text: 'Crew added to this event successfully',
+    heading: 'Success',
+    icon: 'success',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+}
+
+const addCrewToEventCrewError = function () {
+  $.toast({
+    text: 'There was a problem while trying to add these crew',
+    heading: 'Error!',
+    icon: 'error',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
 }
 
 module.exports = {
@@ -267,5 +315,8 @@ module.exports = {
   onEditEvent,
   onUpdateExisitngEventSuccess,
   onUpdateExisitngEventFailure,
-  onAddCrewToEventUI
+  onAddCrewToEventUI,
+  addCrewToEventCrewSuccess,
+  addCrewToEventCrewError,
+  onEditEventError
 }
