@@ -17,7 +17,6 @@ const onRowClick = function (event) {
       .catch(ui.onRowClickError)
   } else if (currentDisplay === 'Crews') {
     const id = $(this).attr('data-id')
-    console.log(id)
     api.getEventByID(id)
       .then(ui.onEditEvent)
       .catch(ui.onEditEventError)
@@ -181,7 +180,6 @@ const getCheckBoxValues = function () {
 
 const exportCrewList = function () {
   const eventId = $('#EventExportID').text()
-  console.log(eventId)
   api.getEventCrewsByEventID(eventId)
     .then(ui.createPDF)
     // .catch(ui.getEventCrewsByEventIDError)
