@@ -50,12 +50,12 @@ const onAddNewCrewMember = function (event) {
     .catch(ui.populateTableWithIndexFailure)
 }
 
-const populateTable = function () {
-  event.preventDefault()
-  api.getAll()
-    .then(ui.populateTableWithIndex)
-    .catch(ui.populateTableWithIndexFailure)
-}
+// const populateTable = function () { // is this needed? TODO
+//   event.preventDefault()
+//   api.getAll()
+//     .then(ui.populateTableWithIndex)
+//     .catch(ui.populateTableWithIndexFailure)
+// }
 
 const deleteCrewRecord = function (event) {
   event.preventDefault()
