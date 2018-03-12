@@ -3,6 +3,7 @@
 const showCrewsTemplate = require('../templates/crews.handlebars')
 const showEventsTemplate = require('../templates/events.handlebars')
 const addCrewToEventTemplate = require('../templates/selectCrews.handlebars')
+const crewsToExportTemplate = require('../templates/eventcrews.handlebars')
 require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.js')
 require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.css')
 // require('../../../node_modules/bootstrap-select/js/bootstrap-select.js')
@@ -143,10 +144,64 @@ const onDeleteRecordSuccess = function () {
   })
 }
 
+const onDeleteRecordFailure = function () {
+  $.toast({
+    text: 'There was an error deleting this crew member',
+    heading: 'Error!',
+    icon: 'error',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 6000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+  $('#cannotDeleteCrew').modal('show')
+}
+
+const onDeleteEventRecordFailure = function () {
+  $.toast({
+    text: 'There was an error deleting this event',
+    heading: 'Error!',
+    icon: 'error',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+  $('#cannotDeleteEvent').modal('show')
+}
+
+const onDeleteEventRecordSuccess = function () {
+  $.toast({
+    text: 'Event successfully deleted',
+    heading: 'Success!',
+    icon: 'success',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+}
+
+const populateTableWithEvents = function (data) {
+  const showEventsHtml = showEventsTemplate({ events: data.events })
+  $('#crewsTable tbody').empty()
+  $('#crewsTable tbody').append(showEventsHtml)
+}
+
 const showEvents = function (data) {
   $('#eventsOrCrew').text('Crews')
-  console.log(data)
-  console.log(data.events)
   const showEventsHtml = showEventsTemplate({ events: data.events })
   $('#crewsTable tbody').empty()
   $('#crewsTable tbody').append(showEventsHtml)
@@ -298,6 +353,28 @@ const addCrewToEventCrewError = function () {
   })
 }
 
+const populateModalWithCrewForEvent = function (data) {
+  const eventCrewsHtml = crewsToExportTemplate({ crews: data.crews })
+  $('#crewToExportTable tbody').empty()
+  $('#crewToExportTable tbody').append(eventCrewsHtml)
+}
+
+const getEventCrewsByEventIDError = function () {
+  $.toast({
+    text: 'There was a problem while trying to get all these crew',
+    heading: 'Error!',
+    icon: 'error',
+    showHideTransition: 'plain',
+    allowToastClose: true,
+    hideAfter: 3000,
+    stack: 5,
+    position: 'top-right',
+    textAlign: 'left',
+    loader: true,
+    loaderBg: '#9EC600'
+  })
+}
+
 module.exports = {
   onAddNewCrewMemberError,
   onAddNewCrewMemberSuccess,
@@ -318,5 +395,11 @@ module.exports = {
   onAddCrewToEventUI,
   addCrewToEventCrewSuccess,
   addCrewToEventCrewError,
-  onEditEventError
+  onEditEventError,
+  populateModalWithCrewForEvent,
+  getEventCrewsByEventIDError,
+  onDeleteRecordFailure,
+  onDeleteEventRecordFailure,
+  onDeleteEventRecordSuccess,
+  populateTableWithEvents
 }

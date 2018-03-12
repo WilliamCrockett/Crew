@@ -56,6 +56,9 @@ const onToSignUp = function () {
   $('.sign-in-form').toggle()
   $('.sign-up-form').toggle()
   $('.sign-up-error').css('display', 'none')
+  $('#signInForm').each(function () {
+    this.reset()
+  })
 }
 
 const onSignUpSuccess = function () {
@@ -89,6 +92,9 @@ const onToSignIn = function () {
   $('.sign-in-form').toggle()
   $('.sign-up-form').toggle()
   $('.sign-in-error').css('display', 'none')
+  $('#signUpForm').each(function () {
+    this.reset()
+  })
 }
 
 const onChangePasswordSuccess = function () {

@@ -2,16 +2,31 @@ tr:hover {
   cursor: pointer;
 }
 
-.footer {
-  display: inline-block;
-  position: absolute;
-}
-
-
-.settings {
-  // text-align: : right;
-  // float: right;
-}
+// .footer {
+//   bottom: 0;
+//   padding: 0px;
+//   position: absolute;
+//   width: 100%;
+//   z-index: 99999;
+// }
+//
+// .footer h2 {
+//   display: inline;
+//   margin-left: 33%;
+//   padding-bottom: 5px;
+//   padding-top: 0px;
+//   text-align: center;
+// }
+//
+// .footer hr {
+//   padding: 0px;
+// }
+//
+// .version-control {
+//   font-size: 15px;
+//   padding-bottom: 5px;
+//   text-align: right;
+// }
 
 .control-buttons {
   text-align: center;
@@ -32,11 +47,6 @@ tr:hover {
 .navbar {
   display: none;
 }
-
-// .btn-crew {
-//   width: 94%; //TODO learn to do this properly
-//   margin-left: 8%;
-// }
 
 .sign-in {
   text-align: center;

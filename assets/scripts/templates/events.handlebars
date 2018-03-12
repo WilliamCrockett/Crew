@@ -2,6 +2,7 @@
   <td>Event Name</td>
   <td>Event Date</td>
   <td>Export Crew List</td>
+  <td>Delete Event</td>
 </tr>
 
 {{#each events as |event|}}
@@ -10,6 +11,7 @@
    <td>{{event.name}}</td>
    <td>{{event.event_date}}</td>
     <td><button class="btn btn-default export_crew_list" data-id="{{event.id}}">Export?</span></td>
+    <td><button class="btn btn-default delete_event_record" data-id="{{event.id}}">Delete?</span></td>
  </tr>
 
 

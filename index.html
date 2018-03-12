@@ -135,14 +135,14 @@
                   <div class="row">
                     <label for="Emaill Address" class="col-sm-3 control-label pad-5">Email Address</label>
                     <div class="col-sm-9 pad-5">
-                      <input type="email" name="credentials[email]" class="form-control" id="signInEmail" placeholder="Email Address">
+                      <input type="email" name="credentials[email]" class="form-control" id="signInEmail" placeholder="Email Address" required>
                     </div>
                   </div>
 
                   <div class="row">
                     <label for="inputPassword3" class="col-sm-3 control-label pad-5">Password</label>
                     <div class="col-sm-9 pad-5">
-                      <input type="password" name="credentials[password]" class="form-control" id="inputPassword" placeholder="Password">
+                      <input type="password" name="credentials[password]" class="form-control" id="inputPassword" placeholder="Password" required>
                     </div>
                 </div>
 
@@ -155,7 +155,7 @@
         </form>
 
       <!-- signUp -->
-      <!-- event handler added onf orm submit -->
+      <!-- event handler added on form submit -->
       <form class="sign-up-form" id="signUpForm">
         <div class="col-md-4 sign-up-main">
           <div class="sign-up">
@@ -163,17 +163,17 @@
             <div class="sign-up-error"><p>There was an error while signing up. Please check credentials and try again</p></div>
             <label for="Emaill Address" class="col-sm-3 control-label pad-5">Email Address</label>
             <div class="col-sm-9 pad-5">
-              <input type="email" name="credentials[email]" class="form-control" id="signUpEmail" placeholder="Email Address">
+              <input type="email" name="credentials[email]" class="form-control" id="signUpEmail" placeholder="Email Address" required>
             </div>
 
             <label for="inputPassword3" class="col-sm-3 control-label pad-5">Password</label>
             <div class="col-sm-9 pad-5">
-              <input type="password" name="credentials[password]" class="form-control" id="signUpPassword" placeholder="Password">
+              <input type="password" name="credentials[password]" class="form-control" id="signUpPassword" placeholder="Password" required>
             </div>
 
             <label for="inputPassword3" class="col-sm-3 control-label pad-5">Password</label>
             <div class="col-sm-9 pad-5">
-              <input type="password" name="credentials[password_confirmation]" class="form-control" id="signUpPasswordConf" placeholder="Confirm password">
+              <input type="password" name="credentials[password_confirmation]" class="form-control" id="signUpPasswordConf" placeholder="Confirm password" required>
             </div>
 
             <div class="sign-up pad-5">
@@ -200,7 +200,7 @@
 
                   <label for="inputName" class="col-sm-3 control-label">Full Name</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="text" name="crew[full_name]" class="form-control" id="editCrewName" placeholder="Full Name">
+                    <input type="text" name="crew[full_name]" class="form-control" id="editCrewName" placeholder="Full Name" required>
                   </div>
 
                   <label for="SAS Number" class="col-sm-3 control-label">SAS Number</label>
@@ -310,11 +310,11 @@
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-3 control-label">Old password</label>
                   <div class="col-sm-9">
-                    <input type="password" name="passwords[old]" class="form-control" id="changePasswordOld" placeholder="old password">
+                    <input type="password" name="passwords[old]" class="form-control" id="changePasswordOld" placeholder="old password" required>
                   </div>
                   <label for="inputPassword3" class="col-sm-3 control-label">New password</label>
                   <div class="col-sm-9">
-                    <input type="password" name="passwords[new]" class="form-control" id="changePasswordNew" placeholder="new password">
+                    <input type="password" name="passwords[new]" class="form-control" id="changePasswordNew" placeholder="new password" required>
                   </div>
                   <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default">Change Password</button>
@@ -332,7 +332,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Delete user with ID:<span id="userIDDelete">"UserID"</span></h4>
+              <h4 class="modal-title">Delete Crew Member with ID:<span id="userIDDelete">"UserID"</span></h4>
             </div>
             <div class="modal-body">
               <p>You sure you wanna delete this record bro? There's no going back!</p>
@@ -340,6 +340,24 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Nope, I changed my mind</button>
               <button type="button" class="btn btn-primary" id="deleteRecordConfirmation">Yeah bro, doit toit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- delete event conf -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="confirmEventDelete">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Delete event with ID:<span id="eventIDDelete">"UserID"</span></h4>
+            </div>
+            <div class="modal-body">
+              <p>You sure you wanna delete this event bro? There's no going back!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Nope, I changed my mind</button>
+              <button type="button" class="btn btn-primary" id="deleteEventRecordConfirmation">Yeah bro, doit toit</button>
             </div>
           </div>
         </div>
@@ -358,7 +376,7 @@
                 <label for="inputName" class="col-sm-3 control-label">Event Name</label>
                 <!-- TODO fix this styling -->
                 <div class="col-sm-9 pad-5">
-                  <input type="text" name="event[name]" class="form-control" id="newEventName" placeholder="Event Name">
+                  <input type="text" name="event[name]" class="form-control" id="newEventName" placeholder="Event Name" required>
                 </div>
                 <label for="inputDate" class="col-sm-3 control-label">Event date</label>
                 <div class="col-sm-9 pad-5">
@@ -387,12 +405,13 @@
                 <label for="inputName" class="col-sm-3 control-label">Event Name</label>
                 <!-- TODO fix this styling -->
                 <div class="col-sm-9 pad-5">
-                  <input type="text" name="event[name]" class="form-control" id="editEventName" placeholder="Event Name">
+                  <input type="text" name="event[name]" class="form-control" id="editEventName" placeholder="Event Name" required>
                 </div>
                 <label for="inputDate" class="col-sm-3 control-label">Event date</label>
                 <div class="col-sm-9 pad-5">
                   <input type="date" name="event[event_date]" class="form-control" id="editEventDate">
                 </div>
+                <!-- <button type="button" class="btn btn-primary" id="addCrewToEventButtonExisitn">Add Crew to this event</button> -->
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary" id="editEventButton">Yeah bro, doit toit</button>
                 </div>
@@ -401,16 +420,25 @@
           </div>
         </div>
       </div>
+
       <!-- export crew list -->
       <div class="modal fade" tabindex="-1" role="dialog" id="exportEvent">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Export Crew List for event with ID: <span>"UserID"</span></h4>
+              <h4 class="modal-title">Export Crew List for event with ID: <span id="EventExportID">"EventID"</span></h4>
             </div>
             <div class="modal-body">
-              <p>Feature coming soon...</p>
+              <div class="content-table" id="crewToExport">
+                <table class="table table-striped table-hover" id="crewToExportTable">
+                  <!-- placeholders -->
+                  <tr class='header_row'>
+                    <td>Full Name</td>
+                    <td>SAS Number</td>
+                  </tr>
+                </table>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Nope, I changed my mind</button>
@@ -436,10 +464,45 @@
         </div>
       </div>
 
+      <!-- Cannot delete crew -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="cannotDeleteCrew">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Record cannot be deleted</h4>
+            </div>
+            <div class="modal-body">
+              <p>We cannot delete this record. This crew member has already been included as a crew member for an event. Deleting this will have unwanted ramifications.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cannot delete event -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="cannotDeleteEvent">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Record cannot be deleted</h4>
+            </div>
+            <div class="modal-body">
+              <p>We cannot delete this record. This event already has crew members assigned to it. Deleting this will have unwanted ramifications.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- <footer class="footer">
         <hr>
-        <p class="version_control">v0.3.0</p>
-        <h2>Built by <a target="_blank" href='https://github.com/WilliamCrockett'>me</a>, with help from <a target="_blank" href='https://twitter.com/GA_boston'>them</a>  </h2>
+        <span class="version-control">v0.3.0</span><h2>Built by <a target="_blank" href='https://github.com/WilliamCrockett'>me</a>, with help from <a target="_blank" href='https://twitter.com/GA_boston'>them</a>  </h2>
       </footer> -->
 
     </body>

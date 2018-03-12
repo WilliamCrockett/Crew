@@ -60,6 +60,17 @@ const deleteCrewMember = function (id) {
 }
 
 // start of event end points
+const deleteEventRecord = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/events/' + id,
+    method: 'DELETE',
+    headers: {
+      contentType: 'application/json',
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const createNewEvent = function (data) {
   return $.ajax({
     url: config.apiOrigin + '/events',
@@ -133,8 +144,15 @@ const createEventCrews = function (eID, cID) {
   })
 }
 
-const getEventCrewsByEventID = function () {
-
+const getEventCrewsByEventID = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/crews?event_id=' + id,
+    method: 'GET',
+    headers: {
+      contentType: 'application/json',
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
 }
 
 module.exports = {
@@ -149,5 +167,6 @@ module.exports = {
   onEditEvent,
   getLastEvent,
   createEventCrews,
-  getEventCrewsByEventID
+  getEventCrewsByEventID,
+  deleteEventRecord
 }

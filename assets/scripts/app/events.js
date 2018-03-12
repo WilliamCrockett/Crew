@@ -5,6 +5,7 @@ const api = require('./api.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
 
 let dataID = 0
+let eventDataID = 0
 const checkedValues = []
 
 const onRowClick = function (event) {
@@ -62,11 +63,22 @@ const deleteCrewRecord = function (event) {
   event.stopPropagation()
   api.deleteCrewMember(dataID)
     .then(ui.onDeleteRecordSuccess)
-    .catch(ui.onDeleteRecordFailure) // TODO
+    .catch(ui.onDeleteRecordFailure)
     .then(api.getAll)
     .then(ui.populateTableWithIndex)
     .catch(ui.populateTableWithIndexFailure)
   $('#confirmDelete').modal('hide')
+}
+
+const deleteEventRecord = function (event) {
+  event.preventDefault()
+  api.deleteEventRecord(eventDataID)
+    .then(ui.onDeleteEventRecordSuccess)
+    .catch(ui.onDeleteEventRecordFailure)
+    .then(api.getAllEvents)
+    .then(ui.populateTableWithEvents)
+    .catch(ui.getAllEventsError)
+  $('#confirmEventDelete').modal('hide')
 }
 
 const showModalDeleteConfirm = function (event) {
@@ -74,6 +86,13 @@ const showModalDeleteConfirm = function (event) {
   dataID = $(this).attr('data-id')
   $('#userIDDelete').text(dataID)
   $('#confirmDelete').modal('show')
+}
+
+const showModalDeleteEvent = function (event) {
+  event.stopPropagation()
+  eventDataID = $(this).attr('data-id')
+  $('#eventIDDelete').text(eventDataID)
+  $('#confirmEventDelete').modal('show')
 }
 
 const showNewEventModal = function (event) {
@@ -126,8 +145,12 @@ const onToggleBetweenEventsAndCrew = function (event) {
 
 const showModalExportEvent = function (event) {
   event.stopPropagation()
+  const eventId = $(this).attr('data-id')
+  $('#EventExportID').text(eventId)
   $('#exportEvent').modal('show')
-  // api.getEventCrewsByEventID()
+  api.getEventCrewsByEventID(eventId)
+    .then(ui.populateModalWithCrewForEvent)
+    .catch(ui.getEventCrewsByEventIDError)
 }
 
 const editEvent = function (event) {
@@ -135,7 +158,7 @@ const editEvent = function (event) {
   const data = getFormFields(this)
   const id = $('#EventID').text()
   api.onEditEvent(data, id)
-    .then(ui.onUpdateExisitngEventSuccess) // here
+    .then(ui.onUpdateExisitngEventSuccess)
     .catch(ui.onUpdateExisitngEventFailure)
     .then(api.getAllEvents)
     .then(ui.showEvents)
@@ -167,9 +190,13 @@ const addHandlers = () => {
   $('#addNewEvent').on('submit', onNewEvent)
   $('#ToggleBetweenEventsAndCrew').on('click', onToggleBetweenEventsAndCrew)
   $('#contentTable').on('click', '.export_crew_list', showModalExportEvent)
+  $('#contentTable').on('click', '.delete_event_record', showModalDeleteEvent)
   $('#editExistingEvent').on('submit', editEvent)
   $('#addCrewToEventButton').on('click', onAddCrewToEvent)
   $('#addThisSelectionToEvent').on('click', getCheckBoxValues)
+  $('#deleteEventRecordConfirmation').on('click', deleteEventRecord)
+  $('#addCrewToEventButtonExisitng').on('click', onAddCrewToEvent)
+  // $('#editExisitngEvent').on('submit', )
   // $('.delete_record').on('click', deleteCrewRecord)
   // leave this one at the bottom
   $('#settingsButton').on('click', function () {
