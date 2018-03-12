@@ -1,6 +1,6 @@
-#Welcome to Crew
-##A simple web app designed to help you manage your crew lists for events
-###Currently this is designed with a South African use case in mind, but I plan to update that in future versions.
+# Welcome to Crew
+## A simple web app designed to help you manage your crew lists for events
+### Currently this is designed with a South African use case in mind, but I plan to update that in future versions.
 ### [link to api] (https://github.com/WilliamCrockett/crew-api)
 
 ---
