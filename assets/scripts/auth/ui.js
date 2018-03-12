@@ -112,9 +112,6 @@ const onChangePasswordSuccess = function () {
     loader: true,
     loaderBg: '#9EC600'
   })
-  $('#editUserSettings').each(function () {
-    this.reset()
-  })
 }
 
 const onChangePasswordFailure = function () {

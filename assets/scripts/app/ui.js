@@ -375,6 +375,23 @@ const getEventCrewsByEventIDError = function () {
   })
 }
 
+const createPDF = function (data) { // TODO work out this exporting
+  const doc = new jsPDF({
+    orientation: 'landscape'
+  })
+  const specialElementHandlers = {
+    '#editor': function (element, renderer) {
+      return true
+    }
+  }
+  doc.fromHTML($('#crewToExport').get(0), 15, 15, {
+    'width': 170,
+    'elementHandlers': specialElementHandlers
+  })
+  doc.save('eventCrewList.pdf')
+  $('#exportEvent').modal('hide')
+}
+
 module.exports = {
   onAddNewCrewMemberError,
   onAddNewCrewMemberSuccess,
@@ -401,5 +418,6 @@ module.exports = {
   onDeleteRecordFailure,
   onDeleteEventRecordFailure,
   onDeleteEventRecordSuccess,
-  populateTableWithEvents
+  populateTableWithEvents,
+  createPDF
 }

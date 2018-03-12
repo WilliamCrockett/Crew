@@ -179,6 +179,14 @@ const getCheckBoxValues = function () {
   $('#addCrewToEvent').modal('hide')
 }
 
+const exportCrewList = function () {
+  const eventId = $('#EventExportID').text()
+  console.log(eventId)
+  api.getEventCrewsByEventID(eventId)
+    .then(ui.createPDF)
+    // .catch(ui.getEventCrewsByEventIDError)
+}
+
 const addHandlers = () => {
   $('#contentTable').on('click', '.crew_row', onRowClick)
   $('#editBoatDetailsForm').on('submit', onSaveUpdatedBoatDetails)
@@ -196,6 +204,7 @@ const addHandlers = () => {
   $('#addThisSelectionToEvent').on('click', getCheckBoxValues)
   $('#deleteEventRecordConfirmation').on('click', deleteEventRecord)
   $('#addCrewToEventButtonExisitng').on('click', onAddCrewToEvent)
+  $('#exportCrew').on('click', exportCrewList)
   // $('#editExisitngEvent').on('submit', )
   // $('.delete_record').on('click', deleteCrewRecord)
   // leave this one at the bottom

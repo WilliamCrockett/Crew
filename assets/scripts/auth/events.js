@@ -55,6 +55,12 @@ const onChangePassword = function (event) {
     .catch(ui.onChangePasswordFailure)
 }
 
+const clearPwForm = function () {
+  $('#changePasswordForm').each(function () {
+    this.reset()
+  })
+}
+
 const addHandlers = () => {
   // $('#contentTable tr').on('click', onRowClick)
   $('#signUpForm').on('submit', onSignUp)
@@ -63,6 +69,7 @@ const addHandlers = () => {
   $('#signInLink').on('click', toSignIn)
   $('#signOut').on('click', onSignOut)
   $('#changePasswordForm').on('submit', onChangePassword)
+  $('#settingsButton').on('click', clearPwForm)
 }
 
 module.exports = {
