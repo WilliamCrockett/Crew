@@ -4,6 +4,7 @@ const showCrewsTemplate = require('../templates/crews.handlebars')
 const showEventsTemplate = require('../templates/events.handlebars')
 const addCrewToEventTemplate = require('../templates/selectCrews.handlebars')
 const crewsToExportTemplate = require('../templates/eventcrews.handlebars')
+const crewsToExportFullTemplate = require('../templates/crewsFull.handlebars')
 require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.js')
 require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.css')
 // require('../../../node_modules/bootstrap-select/js/bootstrap-select.js')
@@ -357,6 +358,10 @@ const populateModalWithCrewForEvent = function (data) {
   const eventCrewsHtml = crewsToExportTemplate({ crews: data.crews })
   $('#crewToExportTable tbody').empty()
   $('#crewToExportTable tbody').append(eventCrewsHtml)
+
+  const eventCrewsExportHtml = crewsToExportFullTemplate({ crews: data.crews })
+  $('#crewsTableHidden tbody').empty()
+  $('#crewsTableHidden tbody').append(eventCrewsExportHtml)
 }
 
 const getEventCrewsByEventIDError = function () {
@@ -376,6 +381,7 @@ const getEventCrewsByEventIDError = function () {
 }
 
 const createPDF = function (data) { // TODO work out this exporting
+  $('.hidden-content-table').css('display', 'block')
   const doc = new jsPDF({
     orientation: 'landscape'
   })
@@ -384,12 +390,14 @@ const createPDF = function (data) { // TODO work out this exporting
       return true
     }
   }
-  doc.fromHTML($('#crewToExport').get(0), 15, 15, {
+  doc.fromHTML($('#exportCrewTable').get(0), 10, 10, {
     'width': 170,
     'elementHandlers': specialElementHandlers
   })
   doc.save('eventCrewList.pdf')
   $('#exportEvent').modal('hide')
+
+  $('.hidden-content-table').css('display', 'none')
 }
 
 module.exports = {

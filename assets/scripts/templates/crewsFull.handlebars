@@ -1,0 +1,20 @@
+<tr class='header_row'>
+  <td>Full Name</td>
+  <td>SAS Number</td>
+  <td>Email Address</td>
+  <td>Cell Number</td>
+  <td>Shirt Size</td>
+</tr>
+
+{{#each crews as |crew|}}
+
+ <tr class ="crew_row" data-id="{{crew.id}}">
+   <td>{{crew.full_name}}</td>
+   <td>{{crew.sas_number}}</td>
+   <td>{{crew.email_address}}</td>
+   <td>{{crew.cell_number}}</td>
+   <td>{{crew.shirt_size}}</td>
+ </tr>
+
+
+{{/each}}
