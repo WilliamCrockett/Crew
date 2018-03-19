@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Crew</title>
+      <!-- version 0.31.0 -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>
+    </head>
+    <body>
+      <!-- Nav bar -->
+      <nav class="navbar navbar-default" id="navbar">
+        <div class="container-fluid">
+          <div class="navbar-header">
+              <h1>Crew Tracker</h1>
+              <button type="button" class="btn btn-default navbar-btn settings" data-toggle="modal" data-target="#editUserSettings" id="settingsButton">Settings</button>
+              <!-- <button type="button" class="btn btn-default navbar-btn boat-profile" data-toggle="modal" data-target="#editBoatDetails">Boat Profile</button> -->
+              <button type="button" class="btn btn-default navbar-btn sign-out" id="signOut">Sign Out</button>
+            <!-- <a class="navbar-brand" href="#"> -->
+              <!-- <img alt="Brand" src="#"> -->
+            <!-- </a> -->
+          </div>
+        </div>
+      </nav>
+      <!-- Main section -->
+      <div class="container main-section" id="mainSection">
+      <!-- control-buttons -->
+      <div class="control-buttons">
+        <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#NewCrewMember" id="add-new-crew-member">
+          New crew member
+        </button>
+        <button class="btn btn-default new-event" type="submit" id="NewEventButton">New event</button>
+        <button class="btn btn-default new-event" type="submit" id="ToggleBetweenEventsAndCrew">Show <span id="eventsOrCrew">Events</span></button>
+      </div>
+
+      <!-- Just for gees -->
+      <hr>
+
+      <!-- crew content table -->
+      <!-- event handler added for on row click -->
+      <div class="content-table" id="contentTable">
+        <table class="table table-striped table-hover" id="crewsTable">
+          <!-- placeholders -->
+          <tr class='header_row'>
+            <td>Full Name</td>
+            <td>SAS Number</td>
+            <td>Email Address</td>
+            <td>Cell Number</td>
+            <td>Next of Kin</td>
+            <td>NoK Cell Number</td>
+            <td>Shirt Size</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- modal add new crew member -->
+      <!-- event handler added onf orm submit -->
+      <div class="modal fade" id="NewCrewMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add new crew member</h4>
+            </div>
+            <div class="modal-body">
+              <!--  Modal form -->
+              <form class="form-horizontal" id="addNewCrewMember">
+                <div class="form-group">
+
+                  <label for="inputName" class="col-sm-3 control-label">Full Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="crew[full_name]" class="form-control" id="newCrewName" placeholder="Full Name" required>
+                  </div>
+
+                  <label for="SAS Number" class="col-sm-3 control-label">SAS Number</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="crew[sas_number]" class="form-control" id="newCrewSASNumber" placeholder="SAS Number">
+                  </div>
+
+                  <label for="Emaill Address" class="col-sm-3 control-label">Email Address</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="email" name="crew[email_address]" class="form-control" id="newCrewEmail" placeholder="Email Address">
+                  </div>
+
+                  <label for="Cellphone Number" class="col-sm-3 control-label">Cell Number</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="tel" name="crew[cell_number]" class="form-control" id="newCrewTellNumber" placeholder="083 123 4567">
+                  </div>
+
+                  <label for="NoKName" class="col-sm-3 control-label">Next of Kin Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="crew[next_of_kin]" class="form-control" id="newCrewNOKName" placeholder="Full Name">
+                  </div>
+
+                  <label for="Cellphone Number" class="col-sm-3 control-label">NOK Cell Number</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="tel" name="crew[nok_cell_num]" class="form-control" id="newCrewNOKTellNumber" placeholder="083 123 4567">
+                  </div>
+
+                  <label for="Shirt Size" class="col-sm-3 control-label">Shirt Size</label>
+                  <div class="col-sm-9 pad-5">
+                    <select name="crew[shirt_size]">
+                      <option value="Small">Small</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Large">Large</option>
+                      <option value="Extra Large">Extra Large</option>
+                      <option value="XX Large">XX Large</option>
+                      <option value="XXX Large">XXX Large</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-offset-2 col-sm-10 add-crew-btn">
+                    <button type="submit" class="btn btn-default">Add</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- signIn -->
+      <!-- event handler added on form submit -->
+      <form class="sign-in-form" id="signInForm">
+          <div class="col-md-4 sign-in-main row">
+              <div class="sign-up">
+                <h2 class="sign-in">Sign In</h2>
+                  <div class="sign-in-error"><p>There was an error while signing in. Please check credentials and try again</p></div>
+
+                  <div class="row">
+                    <label for="Emaill Address" class="col-sm-3 control-label pad-5">Email Address</label>
+                    <div class="col-sm-9 pad-5">
+                      <input type="email" name="credentials[email]" class="form-control" id="signInEmail" placeholder="Email Address" required>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <label for="inputPassword3" class="col-sm-3 control-label pad-5">Password</label>
+                    <div class="col-sm-9 pad-5">
+                      <input type="password" name="credentials[password]" class="form-control" id="inputPassword" placeholder="Password" required>
+                    </div>
+                </div>
+
+                <div class="sign-in pad-5">
+                  <button type="submit" class="btn btn-default btn-sign-in pad-5" id="signInButton">Sign In</button>
+                  <h6>Not a member? <a class="signup-link" id="signUpLink">Sign-up!</a></h6>
+                </div>
+              </div>
+          </div>
+        </form>
+
+      <!-- signUp -->
+      <!-- event handler added on form submit -->
+      <form class="sign-up-form" id="signUpForm">
+        <div class="col-md-4 col-sm-2 sign-up-main row">
+          <div class="sign-up">
+            <h2 class="sign-up">Sign Up</h2>
+            <div class="sign-up-error"><p>There was an error while signing up. Please check credentials and try again</p></div>
+            <label for="Emaill Address" class="col-sm-3 control-label pad-5">Email Address</label>
+            <div class="col-sm-9 col-sm-3 pad-5">
+              <input type="email" name="credentials[email]" class="form-control" id="signUpEmail" placeholder="Email Address" required>
+            </div>
+
+            <label for="inputPassword3" class="col-sm-3 control-label pad-5">Password</label>
+            <div class="col-sm-9 pad-5">
+              <input type="password" name="credentials[password]" class="form-control" id="signUpPassword" placeholder="Password" required>
+            </div>
+
+            <label for="inputPassword3" class="col-sm-3 control-label pad-5">Password</label>
+            <div class="col-sm-9 pad-5">
+              <input type="password" name="credentials[password_confirmation]" class="form-control" id="signUpPasswordConf" placeholder="Confirm password" required>
+            </div>
+
+            <div class="sign-up pad-5">
+              <button type="submit" class="btn btn-default btn-sign-up pad-5" id="signUpButton">Sign up</button>
+              <h6>Back to <a class="signin-link" id="signInLink">Sign-in?</a></h6>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- modal edit exisitng crew member -->
+      <!-- event handler added on form submit-->
+      <div class="modal fade" id="EditCrewMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit exisitng crew member: UserID: <span id="userID">"UserID"</span></h4>
+            </div>
+            <div class="modal-body">
+              <!--  Modal form -->
+              <form class="form-horizontal" id="editExistingCrewMember">
+                <div class="form-group">
+
+                  <label for="inputName" class="col-sm-3 control-label">Full Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="crew[full_name]" class="form-control" id="editCrewName" placeholder="Full Name" required>
+                  </div>
+
+                  <label for="SAS Number" class="col-sm-3 control-label">SAS Number</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="crew[sas_number]" class="form-control" id="editCrewSASNumber" placeholder="SAS Number">
+                  </div>
+
+                  <label for="Emaill Address" class="col-sm-3 control-label">Email Address</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="email" name="crew[email_address]" class="form-control" id="editCrewEmail" placeholder="Email Address">
+                  </div>
+
+                  <label for="Cellphone Number" class="col-sm-3 control-label">Cell Number</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="tel" name="crew[cell_number]" class="form-control" id="editCrewTellNumber" placeholder="083 123 4567">
+                  </div>
+
+                  <label for="NoKName" class="col-sm-3 control-label">Next of Kin Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="crew[next_of_kin]" class="form-control" id="editCrewNOKName" placeholder="Full Name">
+                  </div>
+
+                  <label for="Cellphone Number" class="col-sm-3 control-label">NOK Cell Number</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="tel" name="crew[nok_cell_num]" class="form-control" id="editCrewNOKTellNumber" placeholder="083 123 4567">
+                  </div>
+
+                  <label for="Shirt Size" class="col-sm-3 control-label">Shirt Size</label>
+                  <div class="col-sm-9 pad-5">
+                    <select name="crew[shirt_size]" id="editCrewShirtSize" class="selectpicker">
+                      <option value="Small">Small</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Large">Large</option>
+                      <option value="Extra Large">Extra Large</option>
+                      <option value="XX Large">XX Large</option>
+                      <option value="XXX Large">XXX Large</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-offset-2 col-sm-10 add-crew-btn">
+                    <button type="submit" class="btn btn-default" id="saveChangesToExistingCrewMember">Save Changes</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- modal edit boat details -->
+      <!-- event handler added on form submit-->
+      <div class="modal fade" id="editBoatDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Edit Boat Details</h4>
+            </div>
+            <div class="modal-body">
+              <!--  Modal form -->
+              <form class="form-horizontal" id="editBoatDetailsForm">
+                <div class="form-group">
+
+                  <label for="inputName" class="col-sm-3 control-label">Boat Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="boat[name]" class="form-control" id="exisitngBoatName" placeholder="Boat Name">
+                  </div>
+
+                  <label for="inputName" class="col-sm-3 control-label">Owner Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="boat[ownerName]" class="form-control" id="exisitngOwnerName" placeholder="Owner Name">
+                  </div>
+
+                  <label for="inputName" class="col-sm-3 control-label">Skipper Name</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="text" name="boat[skipperName]" class="form-control" id="existingSkipperName" placeholder="Skipper Name">
+                  </div>
+
+                  <label for="inputName" class="col-sm-3 control-label">Number of Crew</label>
+                  <div class="col-sm-9 pad-5">
+                    <input type="number" name="boat[numCrew]" class="form-control" id="existingNumCrew" placeholder="Number of Crew">
+                  </div>
+
+                  <div class="col-sm-offset-2 col-sm-10 add-crew-btn">
+                    <button type="submit" class="btn btn-default" id="saveUpdatedBoatDetails">Save</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- modal edit user settings (basically change password at this point) -->
+      <div class="modal fade" id="editUserSettings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+              <div class="change-password-error"><p>There was an error while changing your password. Please check credentials and try again</p></div>
+            </div>
+            <div class="modal-body">
+              <!--  Modal form -->
+              <form class="form-horizontal" id="changePasswordForm">
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-3 control-label">Old password</label>
+                  <div class="col-sm-9">
+                    <input type="password" name="passwords[old]" class="form-control" id="changePasswordOld" placeholder="old password" required>
+                  </div>
+                  <label for="inputPassword3" class="col-sm-3 control-label">New password</label>
+                  <div class="col-sm-9">
+                    <input type="password" name="passwords[new]" class="form-control" id="changePasswordNew" placeholder="new password" required>
+                  </div>
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Change Password</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete record confirmation -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="confirmDelete">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Delete Crew Member with ID:<span id="userIDDelete">"UserID"</span></h4>
+            </div>
+            <div class="modal-body">
+              <p>You sure you wanna delete this record bro? There's no going back!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Nope, I changed my mind</button>
+              <button type="button" class="btn btn-primary" id="deleteRecordConfirmation">Yeah bro, doit toit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- delete event conf -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="confirmEventDelete">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Delete event with ID:<span id="eventIDDelete">"UserID"</span></h4>
+            </div>
+            <div class="modal-body">
+              <p>You sure you wanna delete this event bro? There's no going back!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Nope, I changed my mind</button>
+              <button type="button" class="btn btn-primary" id="deleteEventRecordConfirmation">Yeah bro, doit toit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- add new event -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="newEventModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Add new event</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" id="addNewEvent">
+                <label for="inputName" class="col-sm-3 control-label">Event Name</label>
+                <!-- TODO fix this styling -->
+                <div class="col-sm-9 pad-5">
+                  <input type="text" name="event[name]" class="form-control" id="newEventName" placeholder="Event Name" required>
+                </div>
+                <label for="inputDate" class="col-sm-3 control-label">Event date</label>
+                <div class="col-sm-9 pad-5">
+                  <input type="date" name="event[event_date]" class="form-control">
+                </div>
+                <button type="button" class="btn btn-primary" id="addCrewToEventButton">Add Crew to this event</button>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" id="createNewEventButton">Yeah bro, doit toit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- edit event -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="editEventModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Edit event: ID: <span id=EventID></span></h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" id="editExistingEvent">
+                <label for="inputName" class="col-sm-3 control-label">Event Name</label>
+                <!-- TODO fix this styling -->
+                <div class="col-sm-9 pad-5">
+                  <input type="text" name="event[name]" class="form-control" id="editEventName" placeholder="Event Name" required>
+                </div>
+                <label for="inputDate" class="col-sm-3 control-label">Event date</label>
+                <div class="col-sm-9 pad-5">
+                  <input type="date" name="event[event_date]" class="form-control" id="editEventDate">
+                </div>
+                <!-- <button type="button" class="btn btn-primary" id="addCrewToEventButtonExisitn">Add Crew to this event</button> -->
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" id="editEventButton">Yeah bro, doit toit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- export crew list -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="exportEvent">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Export Crew List for event with ID: <span id="EventExportID">"EventID"</span></h4>
+            </div>
+            <div class="modal-body">
+              <div class="content-table" id="crewToExport">
+                <table class="table table-striped table-hover" id="crewToExportTable">
+                  <!-- placeholders -->
+                  <tr class='header_row'>
+                    <td>Full Name</td>
+                    <td>SAS Number</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Nope, I changed my mind</button>
+              <button type="button" class="btn btn-primary" id="exportCrew">Yeah bro, doit toit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- add crew to event -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="addCrewToEvent">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Add Crew To event with ID: <span>"UserID"</span></h4>
+            </div>
+            <div class="modal-body" id="crewListInputBox">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="addThisSelectionToEvent">Add these crew to this event</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cannot delete crew -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="cannotDeleteCrew">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Record cannot be deleted</h4>
+            </div>
+            <div class="modal-body">
+              <p>We cannot delete this record. This crew member has already been included as a crew member for an event. Deleting this will have unwanted ramifications.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cannot delete event -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="cannotDeleteEvent">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Record cannot be deleted</h4>
+            </div>
+            <div class="modal-body">
+              <p>We cannot delete this record. This event already has crew members assigned to it. Deleting this will have unwanted ramifications.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden-content-table" id="exportCrewTable">
+        <table class="table" id="crewsTableHidden">
+          <!-- placeholders -->
+          <tr class='header_row'>
+            <td>Full Name</td>
+            <td>SAS Number</td>
+            <td>Email Address</td>
+            <td>Cell Number</td>
+            <td>Shirt Size</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- <footer class="footer">
+        <hr>
+        <span class="version-control">v0.3.0</span><h2>Built by <a target="_blank" href='https://github.com/WilliamCrockett'>me</a>, with help from <a target="_blank" href='https://twitter.com/GA_boston'>them</a>  </h2>
+      </footer> -->
+
+    </body>
+</html>
