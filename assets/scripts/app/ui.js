@@ -5,9 +5,9 @@ const showEventsTemplate = require('../templates/events.handlebars')
 const addCrewToEventTemplate = require('../templates/selectCrews.handlebars')
 const crewsToExportTemplate = require('../templates/eventcrews.handlebars')
 const crewsToExportFullTemplate = require('../templates/crewsFull.handlebars')
-require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.js')
-require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.css')
-// require('../../../node_modules/bootstrap-select/js/bootstrap-select.js')
+// require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.js')
+// require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.css')
+require('bootstrap-select')
 
 const onEditNewCrewMember = function (data) {
   $('#editCrewName').val(data.crew['full_name'])

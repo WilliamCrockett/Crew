@@ -1,8 +1,9 @@
 'use strict'
 
 const store = require('../store')
-require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.js')
-require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.css')
+// require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.js')
+require('jquery-toast-plugin')
+// require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.css')
 
 const onSignInSuccess = function (data) {
   $('#signInForm').toggle()
