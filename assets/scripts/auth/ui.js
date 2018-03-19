@@ -5,7 +5,7 @@ require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.js')
 require('../../../node_modules/jquery-toast-plugin/src/jquery.toast.css')
 
 const onSignInSuccess = function (data) {
-  $('#signInForm').toggle() // if this isn't signInForm then ffs cause I changed it
+  $('#signInForm').toggle()
   $('.sign-in-error').css('display', 'none')
   $('.navbar').toggle()
   $('.main-section').toggle()

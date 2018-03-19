@@ -76,7 +76,7 @@
 
                   <label for="inputName" class="col-sm-3 control-label">Full Name</label>
                   <div class="col-sm-9 pad-5">
-                    <input type="text" name="crew[full_name]" class="form-control" id="newCrewName" placeholder="Full Name">
+                    <input type="text" name="crew[full_name]" class="form-control" id="newCrewName" placeholder="Full Name" required>
                   </div>
 
                   <label for="SAS Number" class="col-sm-3 control-label">SAS Number</label>
@@ -106,7 +106,7 @@
 
                   <label for="Shirt Size" class="col-sm-3 control-label">Shirt Size</label>
                   <div class="col-sm-9 pad-5">
-                    <select name="crew[shirt_size]">
+                    <select name="crew[shirt_size]" class="selectpicker">
                       <option value="Small">Small</option>
                       <option value="Medium">Medium</option>
                       <option value="Large">Large</option>
@@ -233,7 +233,7 @@
 
                   <label for="Shirt Size" class="col-sm-3 control-label">Shirt Size</label>
                   <div class="col-sm-9 pad-5">
-                    <select name="crew[shirt_size]" id="editCrewShirtSize">
+                    <select name="crew[shirt_size]" id="editCrewShirtSize" class="selectpicker">
                       <option value="Small">Small</option>
                       <option value="Medium">Medium</option>
                       <option value="Large">Large</option>

@@ -390,7 +390,7 @@ const createPDF = function (data) { // TODO work out this exporting
       return true
     }
   }
-  doc.fromHTML($('#exportCrewTable').get(0), 10, 10, {
+  doc.fromHTML($('#exportCrewTable').get(0), 10, 10, { // wonder if your problem is not using .get(0) or something related?
     'width': 170,
     'elementHandlers': specialElementHandlers
   })
